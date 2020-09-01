@@ -1,14 +1,16 @@
-Reveal.addEventListener('slidechanged', event => {
-    if (event.currentSlide) {
-        event.currentSlide.querySelectorAll('.language-mermaid').forEach(item => {
-            mermaidDiv = document.createElement('div');
-            mermaidDiv.innerHTML = item.innerHTML;
-            mermaidDiv.classList.add('mermaid');
-
-            item.parentNode.replaceWith(mermaidDiv);
-        });
-
-        mermaid.init(event.currentSlide, '.mermaid');
-    }
+mermaid.initialize({
+    startOnLoad: false,
+    theme: 'dark',
+    logLevel: 3,
 });
 
+Reveal.addEventListener('ready', event => {
+    var graphs = document.getElementsByClassName("mermaid");
+    graphs.forEach((item, index) => {
+        var mermaidDiv = document.createElement('div');
+        mermaidDiv.innerHTML = item.innerText; // Ignores html elements added by revealjs highlight plugin.
+        mermaidDiv.classList.add('mermaid');
+        item.replaceWith(mermaidDiv);
+    })
+    mermaid.init(document, '.mermaid');
+});

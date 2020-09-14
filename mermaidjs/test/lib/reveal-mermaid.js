@@ -4,13 +4,30 @@ mermaid.initialize({
     logLevel: 3,
 });
 
-Reveal.addEventListener('ready', event => {
+Reveal.addEventListener('ready', event => asyncMermaidRender(event));
+
+async function asyncMermaidRender(event) {
     var graphs = document.getElementsByClassName("mermaid");
     graphs.forEach((item, index) => {
-        var mermaidDiv = document.createElement('div');
-        mermaidDiv.innerHTML = item.innerText; // Ignores html elements added by revealjs highlight plugin.
+        let graphCode = item.innerText.trim(); //trim() becase of gantt, class and git diagram
+        let mermaidDiv = document.createElement('div');
         mermaidDiv.classList.add('mermaid');
-        item.replaceWith(mermaidDiv);
+        mermaidDiv.setAttribute("data-processed", "true");
+
+        try {
+            // item.innerText ignores html elements added by revealjs highlight plugin.
+            mermaid.mermaidAPI.render('theGraph' + index, graphCode, function(svgCode) {
+                mermaidDiv.innerHTML = svgCode;
+            });
+
+            let parentDiv = document.createElement('div');
+            parentDiv.appendChild(mermaidDiv);
+            item.parentNode.parentNode.insertBefore(parentDiv, item.parentNode);
+            item.parentNode.remove();
+        }
+        catch(err) {
+            console.log("Cannot render mermaid diagram " + index + "\n" + graphCode);
+            console.log(err.message);
+        }
     })
-    mermaid.init(graphs, '.mermaid');
-});
+}

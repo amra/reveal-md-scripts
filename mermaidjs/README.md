@@ -9,24 +9,22 @@ The reveal-md.json file should stay in root directory.
 ## Usage 
 
 Write your mermaid graph into 
-<code>
-```mermaid
 
-```
-</code>
+`` ```mermaid `` <br/>
+&nbsp;&nbsp;`your graph code`<br/>
+`` ``` ``
 
 
 For example:
 
-```mermaid
 
-graph TD;
-  A-->B;
-  A-->C;
-  B-->D;
-  C-->D;
-
-```
+`` ```mermaid ``<br/>
+`graph TD;`<br/>
+&nbsp;&nbsp;`  A-->B;`<br/>
+&nbsp;&nbsp;`  A-->C;`<br/>
+&nbsp;&nbsp;`  B-->D;`<br/>
+&nbsp;&nbsp;`  C-->D;`<br/>
+`` ``` ``<br/>
 
 ## Mermaid links
 

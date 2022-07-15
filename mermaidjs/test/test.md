@@ -88,24 +88,20 @@ Class08 <--> C2: Cool label
 ## Git graph
 
 ```mermaid
-
-gitGraph:
-options
-{
-    "nodeSpacing": 150,
-    "nodeRadius": 10
-}
-end
-commit
-branch newbranch
-checkout newbranch
-commit
-commit
-checkout master
-commit
-commit
-merge newbranch
-
+gitGraph
+   commit id: "ZERO"
+   branch develop
+   commit id:"A"
+   checkout main
+   commit id:"ONE"
+   checkout develop
+   commit id:"B"
+   checkout main
+   commit id:"TWO"
+   cherry-pick id:"A"
+   commit id:"THREE"
+   checkout develop
+   commit id:"C"
 ```
 
 ---

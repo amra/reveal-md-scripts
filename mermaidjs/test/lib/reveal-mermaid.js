@@ -7,7 +7,7 @@ mermaid.initialize({
 Reveal.addEventListener('ready', event => asyncMermaidRender(event));
 
 async function asyncMermaidRender(event) {
-    var graphs = document.getElementsByClassName("mermaid");
+    var graphs = Array.from(document.getElementsByClassName("mermaid"));
     graphs.forEach((item, index) => {
         let graphCode = item.textContent.trim(); //trim() becase of gantt, class and git diagram
         let mermaidDiv = document.createElement('div');
